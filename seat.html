@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Details</title>
+    <link rel="stylesheet" href="search.css">
+    <style>
+        /* Basic styles from previous CSS */
+        .bus-details {
+            margin: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        .bus-details ul li {
+            cursor: pointer;
+            padding: 15px;
+            background-color: #ecf0f1;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .bus-details ul li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Modal styling for bus details */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .modal.show {
+            display: block;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .modal-overlay.show {
+            display: block;
+        }
+
+        .modal-header {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .modal-close {
+            cursor: pointer;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 50px;
+            float: right;
+        }
+
+        .seats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .seat {
+            width: 50px;
+            height: 50px;
+            background-color: #3498db;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .seat.selected {
+            background-color: #2ecc71;
+        }
+
+        .seat.window {
+            background-color: #f39c12;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="contact">
+            <p>Call to book <strong>7995036464</strong></p>
+            <a href="sign.html"><button class="sign-in"><span></span>Sign In</button></a>
+        </div>
+    </header>
+
+    <main>
+        <section class="bus-details">
+            <h2>Available Buses</h2>
+            <div id="details-container">
+                <ul>
+                    <li onclick="showBusDetails('Bus 1')"><strong>Bus 1:</strong> Mumbai to Delhi - 9:00 AM - 6:00 PM (AC Sleeper)</li>
+                    <li onclick="showBusDetails('Bus 2')"><strong>Bus 2:</strong> Mumbai to Delhi - 10:00 AM - 7:00 PM (Non-AC Seater)</li>
+                    <li onclick="showBusDetails('Bus 3')"><strong>Bus 3:</strong> Mumbai to Delhi - 1:00 PM - 10:00 PM (AC Semi-Sleeper)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Modal for Bus Details -->
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal" id="modal">
+            <button class="modal-close" onclick="closeModal()">Close</button>
+            <div class="modal-header" id="modal-header"></div>
+            <div class="seats">
+                <!-- Seat Selection Grid -->
+                <div class="seat" onclick="toggleSeat(this)">1</div>
+                <div class="seat window" onclick="toggleSeat(this)">2</div>
+                <div class="seat" onclick="toggleSeat(this)">3</div>
+                <div class="seat" onclick="toggleSeat(this)">4</div>
+                <div class="seat" onclick="toggleSeat(this)">5</div>
+                <div class="seat window" onclick="toggleSeat(this)">6</div>
+                <div class="seat" onclick="toggleSeat(this)">7</div>
+                <div class="seat" onclick="toggleSeat(this)">8</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Function to display the modal with bus details
+        function showBusDetails(bus) {
+            document.getElementById('modal-header').textContent = `Details for ${bus}`;
+            document.getElementById('modal').classList.add('show');
+            document.getElementById('modal-overlay').classList.add('show');
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById('modal').classList.remove('show');
+            document.getElementById('modal-overlay').classList.remove('show');
+        }
+
+        // Function to toggle seat selection
+        function toggleSeat(seat) {
+            seat.classList.toggle('selected');
+        }
+    </script>
+</body>
+</html>

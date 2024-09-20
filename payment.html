@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Ticket Booking - Payment</title>
+    <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+    <div>
+        <h1>Bus Ticket Booking - Payment</h1>
+        <form id="payment-form">
+            <div>
+                <label for="payment-method">Select Payment Method:</label>
+                <select id="payment-method" name="payment_method" required>
+                    <option value="credit_card">Credit Card</option>
+                    <option value="phonepe">PhonePe</option>
+                    <option value="google_pay">Google Pay</option>
+                    <option value="net_banking">Net Banking</option>
+                </select>
+            </div>
+
+            <!-- Credit Card Section -->
+            <div id="credit-card-details">
+                <h3>Credit Card Details</h3>
+                <label for="card-number">Credit Card Number:</label>
+                <input type="text" id="card-number" name="card_number">
+                <label for="expiry-date">Expiry Date:</label>
+                <input type="text" id="expiry-date" name="expiry_date" placeholder="MM/YY">
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv">
+            </div>
+
+            <!-- PhonePe Section -->
+            <div id="phonepe-details" style="display: none;">
+                <h3>PhonePe Payment</h3>
+                <p>You will be redirected to PhonePe to complete your payment.</p>
+            </div>
+
+            <!-- Google Pay Section -->
+            <div id="google-pay-details" style="display: none;">
+                <h3>Google Pay Payment</h3>
+                <p>You will be redirected to Google Pay to complete your payment.</p>
+            </div>
+
+            <!-- Net Banking Section -->
+            <div id="net-banking-details" style="display: none;">
+                <h3>Net Banking</h3>
+                <p>Select your bank to complete the payment:</p>
+                <select id="bank" name="bank">
+                    <option value="bank1">Bank 1</option>
+                    <option value="bank2">Bank 2</option>
+                    <option value="bank3">Bank 3</option>
+                </select>
+            </div>
+
+            <div>
+                <button type="submit">Pay Now</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('payment-method').addEventListener('change', function() {
+            var selectedMethod = this.value;
+            document.querySelectorAll('div[id$="-details"]').forEach(function(div) {
+                div.style.display = 'none';
+            });
+            document.getElementById(selectedMethod + '-details').style.display = 'block';
+        });
+
+        document.getElementById('payment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Simulate form submission and redirect to confirmation page
+            window.location.href = "ticket.html"; // Redirect to confirmation page
+        });
+    </script>
+</body>
+</html>
